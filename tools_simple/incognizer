@@ -19,6 +19,7 @@
 #		• implement name change with random names		#
 #									#
 
+#       WARNING! THIS IS UNTESTED! USE AT OWN RISK!        #
 
 # 1)  First of all we have to make shure that the networkcards are on:
 
