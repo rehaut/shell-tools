@@ -31,5 +31,5 @@ So I do and I don´t want to compare the two SHA by hand.
 Thats the usecase for this script. Put it somewhere in your <code>$PATH</code> and type into the console:
 
 <code>
-$ shasum path/to/mydownload.zip originalSHA algorythm(e.g. 1,256,...)
+$ shacomp path/to/mydownload.zip originalSHA algorythm(e.g. 1,256,...)
 </code>
