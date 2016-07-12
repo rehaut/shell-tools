@@ -1,10 +1,10 @@
 # BASH
 
-This repo is for testing/playing with/learning about shell scripts.
-The excecutables here are tested and made for OSX Unix.
+This repo is for testing/playing with/learning about/ shell scripts.
+The executables here are tested and made for OSX Unix.
 
-In the directory "Shell_Scripts" you´ll find some tools for your dayly work, I made for myself.
-Feel free to copy them, but know that I´m not responsible if you executed without adjustments.
+In the directory "Shell_Scripts" you´ll find some tools for your daily work, I made for myself.
+Feel free to copy them, but know that I´m not responsible if you executed it without adjustments.
 
 
 <h3>Tool Documentation</h3>
@@ -33,3 +33,12 @@ Thats the usecase for this script. Put it somewhere in your <code>$PATH</code> a
 <code>
 $ shacomp path/to/mydownload.zip originalSHA algorythm(e.g. 1,256,...)
 </code>
+
+
+
+<b>incognizer</b>
+
+Well, sounds strange, is strange, or better it turns you into a stranger on the current network. At least it is supposed to do so. This script is for testing on a OS X computer with airport card. It randomizes the MAC address of your ethernet and wifi connections. It also changes the host and computer name.
+
+You could start this script on @reboot via cron or by hand when needed.
+<b>Note:</b> While the MAC address change is non permanent (reset on reboot), the change of the computer or host name is persistent!
