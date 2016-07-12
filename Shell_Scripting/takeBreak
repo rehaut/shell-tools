@@ -1,0 +1,61 @@
+#!/bin/bash
+
+#	This script helps to take a break from work!		#
+#	run as cronjob once every two hours or so to		#
+#	remember you to pause sometimes...			#
+#								#
+#	It also gives a nice usecase for 'osascript'		#
+#	as alert and as init for sleepmode			#
+#								#
+#	2016 by d11th						#
+
+# This creates the alert window:
+# We use OSA (Open Scripting Aplication) to fire up an native AppleEvent.
+# Therefor we use 'osascript' to handle the communication/translation with the AppleScript command inside BASH
+#
+# We coul use a simple one-liner like:
+# 	x=$(osascript -e 'tell app "System Events" to display dialog "Hello World" default button 3 buttons {"button one", "button two", "buh"}' )
+# 
+# But osascript or System Event have a timeout-function which - if fired - would leave us without a return value for the dialog-display
+# and exits with exception/error.
+# To prevent this, we use 'giving up after XY' - a AppleScript command to handle fallback of timeout
+# We could also use 'with timeout of XY seconds' and 'end timeout' as wrapper around the tell-app function,
+# but the return value would be an empty string or NULL (?) and not so nice to handle...
+#
+# This format 'osacript << EOT AppleScript EOT' looks very promising for further apps..
+
+x=`/usr/bin/osascript <<EOT
+say "Hi! Mach doch eine Pause?"
+tell application "System Events"
+	activate
+	set ReturnedItems to (display dialog "MAKE A BRAKE MY FRIEND!" with title "Breaktime!" with icon 0 buttons {"nope", "5minutes", "OK"} default button 3 giving up after 60)
+	if gave up of ReturnedItems is true then
+	  set ReturnVal to "nope"
+	else
+	  set ReturnVal to the button returned of returnedItems
+	end if
+end tell
+EOT`
+
+echo 'Button is: '$x
+
+# This parts gets the users respond (button) and reacts to it (sleepmode or not):
+# The bin 'osascript' is used to set the computer into sleepmode
+
+if [[ $x = "OK" ]]
+then 
+ date '+%d/%m/%y-%H:%M - takeBreak says: Have a nice break, sir!'
+ /bin/sleep 2
+ /usr/bin/osascript -e 'tell application "System Events" to sleep'
+elif [[ $x = "nope" ]]
+then
+ date '+%d/%m/%y-%H:%M - takeBreak says: GRRRRR… unhealthy nerd!'
+elif [[ $x = "5minutes" ]]
+then
+ date '+%d/%m/%y-%H:%M - takeBreak says: waiting 5min then setting sleepmode.'
+ /bin/sleep 320
+ /usr/bin/osascript -e 'tell application "System Events" to sleep'
+fi
+
+
+exit 0
