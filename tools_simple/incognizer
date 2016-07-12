@@ -19,20 +19,27 @@
 #		• implement name change with random names		#
 #									#
 
-#       WARNING! THIS IS UNTESTED! USE AT OWN RISK!        #
+
+
+#	       WARNING! THIS IS UNTESTED! USE AT OWN RISK!	        #
+
+
+
 
 # 1)  First of all we have to make shure that the networkcards are on:
 
 # wifi connection:
 sW=$(ifconfig en1 | grep status)
-if [[ "$sW" = "status: inactive" ]] then
-  networksetup -setairportpower en1 on
+if [[ "$sW" = "status: inactive" ]]
+then
+ networksetup -setairportpower en1 on
 fi
 
 # ethernet connection:
 sE=$(ifconfig en0 | grep status)
-if [[ "$sE" = "status: inactive" ]] then
-  sudo ifconfig en0 up
+if [[ "$sE" = "status: inactive" ]]
+then
+ sudo ifconfig en0 up
 fi
 
 
@@ -58,10 +65,12 @@ sudo airport -z
 
 # wifi
 networksetup -setairportpower en1 off
+sleep 1
 networksetup -setairportpower en1 on
 
 # ethernet
 sudo ifconfig en0 down
+sleep 2
 sudo ifconfig en0 up
 
 
