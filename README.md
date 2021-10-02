@@ -10,18 +10,20 @@ This repo is for testing/playing with shell scripts.
 
 Helper tool, alarmclock with Window prompt.
 
-- [alertMe for Linux/Gnome](tools_simple/alertMe_gnome) (**depends on zenity**)
-- [alertMe for Apple/OSX](rehaut/shell-tools/tools_simple/alertMe_MAC) (*old untested version*)
+- [alertMe for Linux/Gnome](tools_simple/alertMe_gnome) (*depends on zenity*)
+- [alertMe for Apple/OSX](tools_simple/alertMe_MAC) (*old untested version*)
 
 
 <h4>shacomp</h4>
 
-Wrapper for shaXsum. I don´t want to compare the two SHA keys by hand.
+Wrapper for shasum. I don´t want to compare the two SHA keys by hand.
 Thats the usecase for this script. Put it somewhere in your <code>$PATH</code> and type into the console:
 
 	<code>
 	$ shacomp path/to/mydownload.zip originalSHA algorythm(e.g. 1,256,...)
 	</code>
+
+- [shacomp for Linux/Apple](tools_simple/shacomp) (*depends on shasum*)
 
 
 <h4>subPing</h4>
@@ -33,6 +35,8 @@ A fast ping sript for subnet responce scanning. Scans a whole subnet (eg. xxx.xx
 	$ subPing 192.168.178
 	</code>
 
+- [subPing for Linux/Apple](tools_simple/subPing) (*depends on ping*)
+
 
 <h4>takeBreak</h4>
 
@@ -40,9 +44,11 @@ Helper tool alarmclock, reminding user in taking a break every X hours (old OS X
 
 It is commited to the cronjobs with <code>crontab -e</code> on my System with following entry:
 
-<code>
-30 09-20/2 * * 1-5 /usr/local/bin/takeBreak >>/path/to/your/logdirectory/stdout.log 2>>/path/to/your/logdirectory/stderr.log
-</code>
+	<code>
+	30 09-20/2 * * 1-5 /usr/local/bin/takeBreak >>/path/to/your/logdirectory/stdout.log 2>>/path/to/your/logdirectory/stderr.log
+	</code>
 
 The code gets activated each weekday (MO-FR), between 09:30 and 20:30, every second hour and the standart out and error is written to logfiles.
 When fired, a voice says "Hey! Make a break!" and then a display dialog pops up and I can choose between ignoring or setting the computer into sleepmode.
+
+- [takeBreak for Apple/OSX](tools_simple/takeBreak) (*old, depends on osascript*)
