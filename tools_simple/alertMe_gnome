@@ -1,0 +1,53 @@
+#!/bin/bash
+
+#	This script is for a timed alert		#
+#							#
+#	You don´t want to forget to take the pizza 	#
+#	out of the oven in  half an hour?		#
+#							#
+#	Then this script helps you remember:		#
+#							#
+#	type: alertMe 30 "Pizza is ready!"		#
+#	and concentrate back again on your work...	#
+
+
+# test for arguments:
+if [ $# -lt 1 ]
+then
+  echo " "
+  echo "$0 error:  You must provide a timeperiod in minutes and a message (optional)"
+  echo " "
+  echo "           usage: $ alertMe [time in minutes] <message>"
+  echo " "
+  exit 1
+fi
+
+
+# get the message, if not provided set a default one
+message="HEY! TIME IS UP!"
+if [ $# = 2 ]
+then
+  message="$2"
+fi
+
+
+# The rest of the process runs in a subshell and gets detached from the shell jobs list:
+#
+# The () creating the subshell
+#
+# At the end "&>/dev/null &disown" :
+# &>/dev/null -> detach stdout & stderr and send to /dev/null
+# &disown detach from stdin & removes the command from this shell's job list
+t=$(expr $1 '*' 60)
+echo '['$(date)'] I will alert you in' $1 'Minutes.'
+(
+# convert minutes into seconds and wait this timespan:
+
+sleep $t
+wait
+# its time to activate the alert display:
+paplay /usr/share/sounds/freedesktop/stereo/complete.oga
+zenity --warning --text="$message" --height=400 --width=600 --title=ALERT-ME
+# ALSO USEFULL:
+# notify-send "$message"
+) &>/dev/null &disown

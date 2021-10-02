@@ -19,21 +19,29 @@ then
  exit 1
 fi
 
-# calculate the shasum, then split the resulting string (we only need the first part):
-spl='\ ' read -a arr <<< "$(shasum -a $3 $1)"
 
-#echo "${#arr[@]}" # for debugging: print length of array #
+# calculate the shasum, then split the resulting string (we only need the first part):
+splA='\ ' read -a arr <<< "$(shasum -a $3 $1)"
+
+
+# make Input Checksum small caps and split the line break off ...:
+splB='\n' read -a chcksum <<< $(tr A-Z a-z <<< "$2")
+
 
 # check if both strings are equal:
-if [[ ${arr[0]} = "$2" ]]
+if [[ ${arr[0]} = ${chcksum[0]} ]]
 then
  echo "OK !!"
 else
  echo "WRONG!"
 fi
 
+
 # to manualy compare (never trust the programmer ;-):
 echo "shasum: ${arr[0]}"
-echo "origin: $2"
+echo "origin: ${chcksum[0]}"
+
+# for debugging: print length of array #
+#echo "${#arr[@]}"
 
 exit 0

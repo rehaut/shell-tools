@@ -9,7 +9,8 @@
 #								#
 #	2016 by d11th						#
 
-# This creates the alert window:
+
+
 # We use OSA (Open Scripting Aplication) to fire up an native AppleEvent.
 # Therefor we use 'osascript' to handle the communication/translation with the AppleScript command inside BASH
 #
@@ -24,11 +25,13 @@
 #
 # This format 'osacript << EOT AppleScript EOT' looks very promising for further apps..
 
+
+# This creates the alert window:
 x=`/usr/bin/osascript <<EOT
-say "Hi! Mach doch eine Pause?"
+# say "Hi! Mach doch eine Pause?"
 tell application "System Events"
 	activate
-	set ReturnedItems to (display dialog "MAKE A BRAKE MY FRIEND!" with title "Breaktime!" with icon 0 buttons {"nope", "5minutes", "OK"} default button 3 giving up after 60)
+	set ReturnedItems to (display dialog "TAKE A BRAKE MY FRIEND!" with title "Breaktime!" with icon 0 buttons {"nope", "5minutes", "OK"} default button 3 giving up after 60)
 	if gave up of ReturnedItems is true then
 	  set ReturnVal to "nope"
 	else
@@ -37,11 +40,11 @@ tell application "System Events"
 end tell
 EOT`
 
-echo 'Button is: '$x
+# use for debugging:
+# echo 'Button is: '$x
 
 # This parts gets the users respond (button) and reacts to it (sleepmode or not):
 # The bin 'osascript' is used to set the computer into sleepmode
-
 if [[ $x = "OK" ]]
 then 
  date '+%d/%m/%y-%H:%M - takeBreak says: Have a nice break, sir!'

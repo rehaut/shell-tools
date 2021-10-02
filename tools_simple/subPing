@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# this is a simple ping scan for
+subnet=192.168.178  # 10.101.4  # test with 192.168.178
+if [ $# = 1 ]
+then
+  subnet="$1"
+fi
+
+pingit() {
+  ping -c 1 $1 > /dev/null
+  [ $? -eq 0 ] && echo AP $i is up.
+}
+
+for i in $subnet.{1..254}
+do
+pingit $i & disown
+done
