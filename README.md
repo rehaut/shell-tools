@@ -10,20 +10,25 @@ This repo is for testing/playing with shell scripts.
 
 Helper tool, alarmclock with Window prompt.
 
+	<code>
+	user@hardware:~$ alertMe 10 'Get Ready folks!'
+	[Sa 2. Okt 14:39:33 CEST 2021] I will alert you in 10 Minutes.
+	</code>
+
 - [alertMe for Linux/Gnome](tools_simple/alertMe_gnome) (*depends on zenity*)
 - [alertMe for Apple/OSX](tools_simple/alertMe_MAC) (*old untested version*)
 
 
-<h4>shacomp</h4>
+<h4>shaComp</h4>
 
 Wrapper for shasum. I don´t want to compare the two SHA keys by hand.
 Thats the usecase for this script. Put it somewhere in your <code>$PATH</code> and type into the console:
 
 	<code>
-	$ shacomp path/to/mydownload.zip originalSHA algorythm(e.g. 1,256,...)
+	$ shacComp path/to/mydownload.zip originalSHA algorythm(e.g. 1,256,...)
 	</code>
 
-- [shacomp for Linux/Apple](tools_simple/shacomp) (*depends on shasum*)
+- [shaComp for Linux/Apple](tools_simple/shaComp) (*depends on shasum*)
 
 
 <h4>subPing</h4>
